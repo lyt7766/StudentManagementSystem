@@ -1,0 +1,6 @@
+studentmanagement\studentmanagement\repository\StudentRepository.class
+studentmanagement\studentmanagement\service\StudentService.class
+studentmanagement\studentmanagement\service\impl\StudentServiceImpl.class
+studentmanagement\studentmanagement\entity\Student.class
+studentmanagement\studentmanagement\controller\StudentController.class
+studentmanagement\studentmanagement\StudentmanagementApplication.class
