@@ -22,28 +22,34 @@ public class StudentController {
     //student lists will be stored in the "students", and return to the students view
     @GetMapping("/students")
     public String listStudents(Model model){
+        // pass the info to the rendering view (studnets in this case)
         model.addAttribute("students", studentService.getAllStudents());
         return "students";
     }
 
-    //create the form when user click on the add student button
+    // Create the form when user click on the add student button
     @GetMapping("/students/new")
+    // model is to pass data from the controller to view
     public String createStudentForm(Model model){
         // Student object representing a blank student form.
         Student student = new Student();
+        // bind the form inputs to the student object.
+        // attributeName refer to <form th:object="${student}">
         model.addAttribute("student", student);
-        // the view named "create_student" should be rendered.
+        // The view named "create_student" should be rendered.
         return "create_student";
     }
 
-    //
+    // after user clicking the save button
     @PostMapping("/students")
+    // Model Addtirbute is to bind the form data to the student object
     public String saveStudent(@ModelAttribute("student") Student student){
         studentService.saveStudent(student);
-        return "redirect:/s00tudents";
+        return "redirect:/students";
     }
 
     @GetMapping("/students/edit/{id}")
+    // id value is extracted from the URL path and assigned to the id parameter
     public String editStudentForm(@PathVariable Long id, Model model){
         model.addAttribute("student", studentService.getStudentById(id));
         return "edit_student";
@@ -51,6 +57,7 @@ public class StudentController {
 
     @PostMapping("/students/{id}")
     public String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student,Model model){
+        //  retrieves the existing Student object with the specified id
         Student existingStudent =studentService.getStudentById(id);
         existingStudent.setId(id);
         existingStudent.setFirstName(student.getFirstName());
